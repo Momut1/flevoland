@@ -40,7 +40,6 @@ code to setup dedicated dockers and run the processing pipeline
 ├── outputs
 ├── scripts
 │   ├── flevo5_analysisReadyCNNOUTFiles.py
-│   ├── flevo5_analysisReadyCNNOUTFiles.R
 │   ├── flevo5_bestModel_PA_UA_F1_Evolution_Graph_new_check.R
 │   ├── flevo5_excludeBSOnTSH_best.R
 │   ├── flevo5_excludeBSOnTSH.R
@@ -68,6 +67,8 @@ code to setup dedicated dockers and run the processing pipeline
 
 5. After training completes, run the inference part in parallel via `parallel_inference.sh`. NOTE: You must first have installed `GNU parallel` on you machine. A comprehensive guide on how to install and use it can be found here : https://www.youtube.com/watch?v=OpaiGYxkSuQ&list=PL284C9FF2488BC6D1&index=3&t=2s . NOTE2: one shoule set the `JOBS` variable in the bash script to however many processes one wants to run in parallel. This decision should be guided by the amount of processing power available (number of CPUs). NOTE3: make sure you have set the environmental variables right in order to allow `GNU parallel` to be called from any directory, otherwise you would have to specify the entire path when you call it in the final (line 60) of the `parallel_inference.sh` script.
 
-6. After inferencing is complete run the `Stats-afterparallel.sh` script in order to output a single csv with all the results. It should be located in `../outputs/Random_search_BBCH/Results-all-images.csv`.
+6. After inferencing run `flevo5_analysisReadyCNNOUTFiles.py` in order to format the `cnn_output_data_check.csv` for each model. 
 
-7. Identify the top performing models and complete steps 4,5, and 6 with augmentations in order to push performance higher. NOTE: make sure to change the paths where processing is happening in order not to overwrite the results from the hyper-paramater tuning steps.
+7. After formating is complete run the `Stats-afterparallel.sh` script in order to output a single csv with all the results. It should be located in `../outputs/Random_search_BBCH/Results-all-images.csv`.
+
+8. Identify the top performing models and complete steps 4,5, and 6 with augmentations in order to push performance higher. NOTE: make sure to change the paths where processing is happening in order not to overwrite the results from the hyper-paramater tuning steps.
