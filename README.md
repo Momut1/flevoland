@@ -40,23 +40,14 @@ code to setup dedicated dockers and run the processing pipeline
 ├── scripts
 │   ├── flevo5_analysisReadyCNNOUTFiles.py
 │   ├── flevo5_excludeBSOnTSH.R
-│   ├── flevo5_exploreParcelResults.R
-│   ├── flevo5_f1_ua_pa_total_scatterplot.R
-│   ├── flevo5_figsForPresiorPapare.R
-│   ├── flevo5_loopBBCHgetAccCompareAll_functions.R
-│   ├── flevo5_multiclass_PRC_createInput4PY.R
-│   ├── flevo5_multiclass_PRC.py
-│   ├── flevo5_multiclassROCnAOC_correct.R
 │   ├── hyper-tuning-BBCH_p3.sh
 │   ├── __init__.pyc
 │   ├── label_image_list.py
 │   ├── Label-stats.sh
 │   ├── overallstats.py
 │   ├── parallel_inference.sh
-│   ├── Plot_bestModel.py
 │   ├── Plot.py
 │   ├── retrain.py
-│   ├── Stats-afterparallel_bestModel.sh
 │   ├── Stats-afterparallel.sh
 │   ├── tesorboard_vals.py
 │   └── train_best_model.sh
