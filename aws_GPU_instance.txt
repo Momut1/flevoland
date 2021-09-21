@@ -1,0 +1,60 @@
+#configure aws instance to work with the version of cuda you want
+sudo rm /usr/local/cuda
+sudo ln -s /usr/local/cuda-10.0 /usr/local/cuda
+
+#check version of CuDNN
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+#Uninstall cuDNN
+##https://askubuntu.com/questions/22200/how-to-uninstall-a-deb-package
+apt-cache search libcudnn
+or
+apt-cache search cudnn
+
+#if apt-cache search cudnn returns output dpkg --remove all of them sequentially. I did: (order is important)
+sudo dpkg --remove libcudnn7-doc
+sudo dpkg --remove libcudnn7-dev
+sudo dpkg --remove libcudnn7
+
+#delete all cudnn drivers from previous cudnn installation
+sudo rm /usr/local/cuda-10.0/include/cudnn.h
+sudo rm /usr/local/cuda-10.0/lib64/libcudnn*
+
+
+#install new cudnn .deb files - gotta download and copy these manually 
+#sudo dpkg -i bcudnn7_7.6.5.32-1+cuda10.0_amd64.deb ??? what is this bcudnn???
+sudo dpkg -i libcudnn7_7.6.0.64-1+cuda10.0_amd64.deb
+sudo dpkg -i libcudnn7-dev_7.6.0.64-1+cuda10.0_amd64.deb 
+sudo dpkg -i libcudnn7-doc_7.6.0.64-1+cuda10.0_amd64.deb
+
+# setup your paths
+echo 'export PATH=/usr/local/cuda-10.0/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+sudo ldconfig
+
+##set version to new nvidia catalogue archive shait
+VERSION_FULL="7.6.0.64"
+VERSION="${VERSION_FULL%.*}"
+CUDA_VERSION="10.0"
+OS_ARCH="linux-x64"
+CUDNN_URL="https://developer.download.nvidia.com/compute/redist/cudnn/v${VERSION}/cudnn-${CUDA_VERSION}-${OS_ARCH}-v${VERSION_FULL}.tgz" 
+wget -c ${CUDNN_URL}
+
+#extract
+tar -xzvf cudnn-${CUDA_VERSION}-${OS_ARCH}-v${VERSION_FULL}.tgz
+
+# copy the following files into the cuda toolkit directory.
+sudo cp -P cuda/include/cudnn.h /usr/local/cuda-10.0/include
+sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda-10.0/lib64/
+sudo chmod a+r /usr/local/cuda-10.0/lib64/libcudnn*
+
+#check version of CuDNN to make sure new one is the required one
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+#install tensorflow 
+pip3 install tensorflow-gpu==1.15
+pip3 install tensorflow-hub
+pip3 install absl-py
+
+
