@@ -34,14 +34,11 @@ code to setup dedicated dockers and run the processing pipeline
 │   │   ├── WWH2
 │   │   ├── WWH3
 │   │   └── WWH7
-│   ├── dfExcludeAll_noDup_best.csv
 │   ├── flevo5_test_set_scr3000.csv
 │   ├── gt_BBCH.csv
 ├── outputs
 ├── scripts
 │   ├── flevo5_analysisReadyCNNOUTFiles.py
-│   ├── flevo5_bestModel_PA_UA_F1_Evolution_Graph_new_check.R
-│   ├── flevo5_excludeBSOnTSH_best.R
 │   ├── flevo5_excludeBSOnTSH.R
 │   ├── flevo5_exploreParcelResults.R
 │   ├── flevo5_f1_ua_pa_total_scatterplot.R
@@ -69,6 +66,8 @@ code to setup dedicated dockers and run the processing pipeline
 
 6. After inferencing run `flevo5_analysisReadyCNNOUTFiles.py` in order to format the `cnn_output_data_check.csv` for each model. 
 
-7. After formating is complete run the `Stats-afterparallel.sh` script in order to output a single csv with all the results. It should be located in `../outputs/Random_search_BBCH/Results-all-images.csv`.
+7. After formating is complete run the `flevo5_excludeBSOnTSH.R` in order to create the `dfExcludeAll_noDup_best.csv` which lists all the images from all the runs that have been labelled as either bare soil ot trash/other. This file should then be located at `../inputs/dfExcludeAll_noDup_best.csv`.
 
-8. Identify the top performing models and complete steps 4,5, and 6 with augmentations in order to push performance higher. NOTE: make sure to change the paths where processing is happening in order not to overwrite the results from the hyper-paramater tuning steps.
+8. After formating is complete run the `Stats-afterparallel.sh` script in order to output a single csv with all the results. It should be located in `../outputs/Random_search_BBCH/Results-all-images.csv`.
+
+9. Identify the top performing models and complete steps 4,5,6,7,8 with augmentations in order to push performance higher. NOTE: make sure to change the paths where processing is happening in order not to overwrite the results from the hyper-paramater tuning steps.
