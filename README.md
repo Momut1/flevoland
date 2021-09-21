@@ -43,10 +43,8 @@ code to setup dedicated dockers and run the processing pipeline
 │   ├── hyper-tuning-BBCH_p3.sh
 │   ├── __init__.pyc
 │   ├── label_image_list.py
-│   ├── Label-stats.sh
 │   ├── overallstats.py
 │   ├── parallel_inference.sh
-│   ├── Plot.py
 │   ├── retrain.py
 │   ├── Stats-afterparallel.sh
 │   ├── tesorboard_vals.py
