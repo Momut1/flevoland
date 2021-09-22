@@ -60,3 +60,5 @@ code to setup dedicated dockers and run the processing pipeline
 8. After formating is complete run the `Stats-afterparallel.sh` script in order to output a single csv with all the results. It should be located in `../outputs/Random_search_BBCH/Results-all-images.csv`.
 
 9. Identify the top performing models and complete steps 4,5,6,7,8 with augmentations in order to push performance higher. NOTE: make sure to change the paths where processing is happening in order not to overwrite the results from the hyper-paramater tuning steps.
+
+10. The folder `exploreResultsAndFigures` contains all the scripts used to create the figures in the paper and to explore the results in general.
